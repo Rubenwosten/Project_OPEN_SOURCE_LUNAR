@@ -22,3 +22,19 @@ try:
     print("✅ Xschem launched with rc_circuit.sch")
 except subprocess.CalledProcessError as e:
     print("❌ Failed to launch Xschem:", e)
+
+from Datastructure import GDSBlock, Pin
+
+block = GDSBlock(
+    name="mux1",
+    gds_path="mux1.gds",
+    position=(200, 150),
+    size=(100, 80),
+    pins=[
+        Pin(name="A", direction="input", position=(0, 40)),
+        Pin(name="B", direction="input", position=(0, 60)),
+        Pin(name="Y", direction="output", position=(100, 50)),
+    ]
+)
+
+print(block)
