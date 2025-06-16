@@ -1,0 +1,10 @@
+time_step = 50p
+sim_time_analog = 50n
+sim_time_digital = 50n
+net1 = 1
+net2 = 0
+net3 = 0
+net4 = 0
+net5 = 0
+net6 = 0 
+net7 = 0

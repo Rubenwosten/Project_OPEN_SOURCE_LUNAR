@@ -110,17 +110,22 @@ class ProjectWizard(QWidget): #project wizard class
         try:
             if not os.path.exists(full_project_path): #if full path is not correct
                 os.makedirs(full_project_path) #make path
-
-            for i in range(5): #folder structuur (moet aangepast worden naar schematic/layout die shit door array te maken)
-                action_folder = f"action_{chr(97 + i)}"  # 'a' to 'e' #create folder
-                action_path = os.path.join(full_project_path, action_folder) #join folder path create the folder
-                os.makedirs(os.path.join(action_path, "input"), exist_ok=True) # create also a input folder
-                os.makedirs(os.path.join(action_path, "output"), exist_ok=True) # create output folder
+            self.stages = ["Schematics","RTL-designs","Simulations","Layouts"]
+            for stage in self.stages: #folder structuur (moet aangepast worden naar schematic/layout die shit door array te maken)
+                stage_folder = f"{stage}"  # 'a' to 'e' #create folder
+                action_path = os.path.join(full_project_path, stage_folder) #join folder path create the folder
+                if stage == "Simulations" or stage == "Layouts":
+                    os.makedirs(os.path.join(action_path, "Analog"), exist_ok=True) # create also a analog folder
+                    os.makedirs(os.path.join(action_path, "Digital"), exist_ok=True) # create Digital folder
+                    os.makedirs(os.path.join(action_path, "Mixed"), exist_ok=True) # create mixed folder
+                else:
+                    # Just create the base folder for Schematics and RTL-designs
+                    os.makedirs(action_path, exist_ok=True)
 
         except Exception as e: #do check if succesfull
             QMessageBox.critical(self, "Folder Error", f"Could not create folder structure:\n{str(e)}") #error if not
             return
 
         input_files = [line.text().strip() for line in self.inputs if line.text().strip()] #add the input files
-        self.return_callback(full_project_path, config_path, input_files) #go to mainwindow with the configured files
+        self.return_callback(full_project_path,project_name, config_path, input_files) #go to mainwindow with the configured files
         self.close() #close window

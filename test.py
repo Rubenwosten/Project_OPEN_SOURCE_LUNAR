@@ -1,40 +1,53 @@
-file_path = r"\\wsl$\Ubuntu\home\ruben\projects\test_xschem_sky130\top.sch" #file path for windows
+import os
+import numpy as np
+import matplotlib.pyplot as plt
 
-try:
-    with open(file_path, 'r') as f: #open file
-        content = f.read() #read file
-    print("File loaded successfully!") # gives check if succesfull
-    print("Preview of content:\n", content[:200]) #with quick preview
-except FileNotFoundError: # if not found
-    print("File not found:", file_path)
+def plot_signals(folder_path, file_names, analog_files, output_dir="plots"):
+    os.makedirs(output_dir, exist_ok=True)
 
+    for file_name in file_names:
+        file_path = os.path.join(folder_path, file_name)
 
-import subprocess
+        # Load data
+        try:
+            data = np.loadtxt(file_path)
+            if data.ndim != 2 or data.shape[1] != 2:
+                print(f"Skipping {file_name}: expected 2 columns, got shape {data.shape}")
+                continue
+        except Exception as e:
+            print(f"Error reading {file_name}: {e}")
+            continue
 
-# Define schematic file path in WSL
-wsl_sch_path = "/home/ruben/projects/test_xschem_sky130/top.sch"
+        time = data[:, 0]
+        values = data[:, 1]
 
-# Command to run in WSL
-command = ["wsl", "xschem", wsl_sch_path]
+        # Create plot
+        plt.figure()
+        if file_name in analog_files:
+            plt.plot(time, values, label=file_name)  # Analog
+        else:
+            plt.step(time, values, where='post', label=file_name)  # Digital
 
-try:
-    subprocess.run(command, check=True)
-    print("✅ Xschem launched with rc_circuit.sch")
-except subprocess.CalledProcessError as e:
-    print("❌ Failed to launch Xschem:", e)
+        plt.xlabel("Time (s)")
+        plt.ylabel("Value")
+        plt.title(f"Plot of {file_name}")
+        plt.legend()
+        plt.grid(True)
 
-from Datastructure import GDSBlock, Pin
+        # Save plot
+        safe_name = os.path.splitext(file_name)[0].replace(" ", "_")
+        output_file = os.path.join(output_dir, f"{safe_name}.png")
+        plt.savefig(output_file)
+        plt.close()
+        print(f"Saved plot to {output_file}")
 
-block = GDSBlock(
-    name="mux1",
-    gds_path="mux1.gds",
-    position=(200, 150),
-    size=(100, 80),
-    pins=[
-        Pin(name="A", direction="input", position=(0, 40)),
-        Pin(name="B", direction="input", position=(0, 60)),
-        Pin(name="Y", direction="output", position=(100, 50)),
-    ]
-)
+# === Usage ===
+folder = r'C:/Users/Ruben/OneDrive/Bureaublad/Data_1ns'
+file_names = [
+    "Net1.txt", "Net2.txt", "net3_complete.txt", "Net4_complete.txt",
+    "Net5_complete.txt", "Net6_complete.txt", "Net7_complete.txt", "VOUT.txt"
+]
 
-print(block)
+analog_files = ["Net1.txt", "Net2.txt", "Net7_complete.txt", "VOUT.txt"]
+
+plot_signals(folder, file_names, analog_files)

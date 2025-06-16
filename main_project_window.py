@@ -2,24 +2,38 @@
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPlainTextEdit, QLineEdit, QFileSystemModel, QTreeView,
-    QSplitter, QMenuBar, QAction, QStatusBar
+    QSplitter, QMenuBar, QAction, QStatusBar, QPushButton
 )
 from PyQt5.QtCore import Qt, QDir
 from block_diagram_view import BlockDiagramView  # Custom canvas widget for drawing blocks
+from add_block_dialog import save_blocks
+import os
+from automate_gds import AUTOMATE_ANALOG#, AUTOMATE_DIGITAL
 
 # Main application window that opens a project view
 class MainProjectWindow(QMainWindow):
-    def __init__(self, project_path):
+    def __init__(self, project_path, project_name):
         super().__init__()
         self.setWindowTitle("Analog IC Toolchain - Project View")  # Set title
         self.setGeometry(200, 100, 1200, 800)  # Define window size and position
 
         self.project_path = project_path  # Save project path for internal reference
-
+        self.project_name = project_name
+        self.AUTO_ANALOG = AUTOMATE_ANALOG(self.project_name)
+        #self.AUTO_DIGITAL = AUTOMATE_DIGITAL()
         # === Central layout for the whole window ===
         central_widget = QWidget()
         central_layout = QVBoxLayout()
 
+        #save button for block layout to json 
+        save_button = QPushButton("Save")
+        save_button.clicked.connect(self.save_blocks)
+        central_layout.addWidget(save_button)
+
+        #create button for creating gds2 files
+        Create_button = QPushButton("Create")
+        Create_button.clicked.connect(self.create_gds)
+        central_layout.addWidget(Create_button)
         # === Splitter separates folder view and the diagram/terminal area ===
         splitter = QSplitter(Qt.Horizontal)  # Horizontal splitter
 
@@ -34,7 +48,7 @@ class MainProjectWindow(QMainWindow):
         splitter.addWidget(self.tree_view)  # Add folder view to the splitter
 
         # === Block diagram view (replaces the output terminal) ===
-        self.diagram_view = BlockDiagramView()            # Custom block diagram widget
+        self.diagram_view = BlockDiagramView(self.project_path)            # Custom block diagram widget
         splitter.addWidget(self.diagram_view)             # Add to splitter
         splitter.setStretchFactor(1, 3)                   # Give more space to diagram view
 
@@ -86,3 +100,17 @@ class MainProjectWindow(QMainWindow):
         if command:
             self.output_terminal.appendPlainText(f"> {command}")  # Display in output (commented out above)
             self.input_terminal.clear()  # Clear after executing
+    
+    def save_blocks(self):
+        blocken = self.diagram_view.block_return()
+        self.json_path = os.path.join(self.project_path, "blocks.json")
+        save_blocks(blocken, self.json_path)
+    
+    def create_gds(self):
+        blocken = self.diagram_view.block_return()
+        print(f"Blocks found: {blocken}")
+        for block in blocken:
+            if not block.get('gds_path') and block.get('type', '').lower() == 'analog':
+                print("komt hier")
+                self.AUTO_ANALOG.automation(block)
+

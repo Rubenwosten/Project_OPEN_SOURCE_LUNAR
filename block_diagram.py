@@ -3,6 +3,10 @@ from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsRectItem, QG
 from PyQt5.QtGui import QBrush, QColor, QPainter
 from PyQt5.QtCore import Qt
 
+import json  # Import the JSON module for reading data
+import os    # Import the OS module to check file existence
+
+
 # Define a custom canvas for displaying blocks using QGraphicsView
 class BlockCanvas(QGraphicsView):
     def __init__(self):
@@ -87,9 +91,7 @@ class BlockCanvas(QGraphicsView):
 
     # Load block data from a JSON file and add them to the canvas
     def load_blocks_from_file(self, json_path="blocks.json"):
-        import json  # Import the JSON module for reading data
-        import os    # Import the OS module to check file existence
-
+       
         # If the JSON file exists at the given path
         if os.path.exists(json_path):
             # Open and read the JSON file
@@ -99,3 +101,20 @@ class BlockCanvas(QGraphicsView):
                 # Add each loaded block to the canvas
                 for block in blocks:
                     self.add_block(block)
+    def save_blocks_to_file(self, json_path="blocks.json"):
+        updated_blocks = []
+
+        for block, rect_item, text_item in self.blocks:
+            # Get the updated position from the scene
+            pos = rect_item.scenePos()
+            block['position'] = [int(pos.x()), int(pos.y())]
+
+            updated_blocks.append(block)
+
+        # Write updated block data to file
+        with open(json_path, 'w') as f:
+            json.dump(updated_blocks, f, indent=4)
+
+        print(f"Saved {len(updated_blocks)} blocks to {json_path}")
+
+    

@@ -1,0 +1,27 @@
+v {xschem version=3.4.7RC file_version=1.2}
+G {}
+K {SYMATTR Prefix X
+SYMATTR Value d-flip-flop
+SYMATTR Type block
+SYMATTR File d-flip-flop.v
+SYMATTR ModelType digital
+type=block
+format="@name @pinlist @symname"
+template="name=X1"}
+V {}
+S {}
+E {}
+L 4 50 -30 50 30 {}
+L 4 50 30 120 30 {}
+L 4 120 -30 120 30 {}
+L 4 50 -30 120 -30 {}
+L 4 80 -40 80 -30 {}
+L 4 30 0 50 0 {}
+L 4 120 0 130 0 {}
+B 5 27.5 -2.5 32.5 2.5 {name=d
+dir=in}
+B 5 77.5 -42.5 82.5 -37.5 {name=clk
+dir=in}
+B 5 127.5 -2.5 132.5 2.5 {name=q
+dir=out}
+T {@name} 60 -10 0 0 0.4 0.4 {}

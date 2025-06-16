@@ -11,23 +11,25 @@ from PyQt5.QtCore import Qt, QRectF #more layout functions
 
 BLOCK_JSON_PATH = "blocks.json" #create the file for block layout
 
-def load_blocks(): # function to load the json file
-    if os.path.exists(BLOCK_JSON_PATH): #zoek het pad
-        with open(BLOCK_JSON_PATH, 'r') as f: #open pad
+def load_blocks(path): # function to load the json file
+    if os.path.exists(path): #zoek het pad
+        with open(path, 'r') as f: #open pad
             return json.load(f) #load the blocks
     return [] #if not then is empty
 
-def save_blocks(blocks): # save blocks function
-    with open(BLOCK_JSON_PATH, 'w') as f: #open json file
+def save_blocks(blocks, path): # save blocks function
+    with open(path, 'w') as f: #open json file
         json.dump(blocks, f, indent=4) #update json file
 
 class AddBlockDialog(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, project_path, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Add New Block") #block window
         self.setMinimumWidth(400) #window width
         self.block_data = None #data nog niet
         self.init_ui() #naar ui code
+        self.project_path = project_path
+        self.json_path = os.path.join(self.project_path, "blocks.json")  # Use project-specific pat
 
     def init_ui(self):
         # Main vertical layout for the dialog
@@ -38,6 +40,10 @@ class AddBlockDialog(QDialog):
 
         # Input field for block name
         self.name_edit = QLineEdit()
+
+        self.sch_path_edit = QLineEdit()
+
+        self.constraint_file = QLineEdit()
 
         # Input field for GDS file path and a button to browse files
         self.gds_path_edit = QLineEdit()
@@ -61,6 +67,8 @@ class AddBlockDialog(QDialog):
 
         # Add all labeled fields to the form layout
         form_layout.addRow("Block Name:", self.name_edit)
+        form_layout.addRow("Schematic Path:", self.sch_path_edit)
+        form_layout.addRow("Constraint file:", self.constraint_file)
         form_layout.addRow("GDS Path:", gds_layout)
         form_layout.addRow("Position X:", self.x_edit)
         form_layout.addRow("Position Y:", self.y_edit)
@@ -96,6 +104,8 @@ class AddBlockDialog(QDialog):
         try:
             # Retrieve values from input fields
             name = self.name_edit.text() #get name
+            sch_path = self.sch_path_edit.text() #get schematic path
+            Constraint = self.constraint_file.text() #get schematic path
             gds_path = self.gds_path_edit.text() #get gds path
             x = int(self.x_edit.text()) #get x coordinaat
             y = int(self.y_edit.text()) #get y coordinaat
@@ -106,6 +116,8 @@ class AddBlockDialog(QDialog):
             # Store the data in a dictionary (dictornary kan worden uitbereid. Zowel hier in deze code toevoegen en dan ook in datastructure.py)
             self.block_data = {
                 "name": name,
+                "schematic": sch_path,
+                "Constraint": Constraint,
                 "gds_path": gds_path,
                 "position": [x, y],
                 "size": [w, h],
@@ -113,9 +125,9 @@ class AddBlockDialog(QDialog):
             }
 
             # Load existing blocks from file, append the new one, and save
-            blocks = load_blocks()
+            blocks = load_blocks(self.json_path)
             blocks.append(self.block_data)
-            save_blocks(blocks)
+            save_blocks(blocks, self.json_path)
 
             self.accept()  # Close the dialog with success
         except ValueError:

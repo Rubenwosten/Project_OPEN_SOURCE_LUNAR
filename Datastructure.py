@@ -15,6 +15,8 @@ class Pin:
 @dataclass
 class GDSBlock:
     name: str                    # Block name
+    schematic: str               # Schematic
+    constraint: str
     gds_path: str                # Path to the block's GDS file
     position: Tuple[int, int]    # Block's position in the overall layout
     size: Tuple[int, int]        # Width and height of the block
@@ -24,6 +26,8 @@ class GDSBlock:
     def to_dict(self):
         return {
             "name": self.name,
+            "schematic": self.schematic,
+            "Constraint": self.constraint,
             "gds_path": self.gds_path,
             "position": list(self.position),  # Convert tuple to list for JSON compatibility
             "size": list(self.size),          # Convert tuple to list

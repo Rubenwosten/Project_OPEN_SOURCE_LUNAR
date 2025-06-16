@@ -1,0 +1,19 @@
+* Analog block group 1 simulation
+.subckt RL VinL Vout
+*.ipin VinL
+*.opin Vout
+R1 Vout GND 1k m=1
+R2 VinL Vout 1k m=1
+.ends RL
+
+
+Vnet8 net8 0 0
+
+X7 net8 VOUT RL
+
+.control
+   tran 1.0000n 1.0000u
+   .probe
+   wrdata VOUT.txt V(VOUT)
+.endc
+.end

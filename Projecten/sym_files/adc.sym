@@ -1,0 +1,40 @@
+v {xschem version=3.4.7RC file_version=1.2}
+G {}
+K {SYMATTR Prefix X
+SYMATTR Value adc
+SYMATTR Type block
+SYMATTR File adc.py
+SYMATTR ModelType mixed
+type=block
+format="@name @pinlist @symname"
+template="name=X1"}
+V {}
+S {SYMATTR Prefix X
+SYMATTR Value adc
+SYMATTR Type block
+SYMATTR File adc.v
+SYMATTR name X1
+SYMATTR ModelType digital
+type=block
+format="@name @pinlist @symname"
+template="name=X1"
+}
+E {}
+L 4 20 0 40 0 {}
+L 4 40 -40 40 0 {}
+L 4 40 -0 40 40 {}
+L 4 40 40 140 40 {}
+L 4 140 -40 140 40 {}
+L 4 40 -40 140 -40 {}
+L 4 140 -20 160 -20 {}
+L 4 140 -0 160 0 {}
+L 4 140 20 160 20 {}
+B 5 17.5 -2.5 22.5 2.5 {name=vin
+dir=in}
+B 5 157.5 -22.5 162.5 -17.5 {name=d0
+dir=out}
+B 5 157.5 -2.5 162.5 2.5 {name=d1
+dir=out}
+B 5 157.5 17.5 162.5 22.5 {name=d2
+dir=out}
+T {@name} 60 -10 0 0 0.4 0.4 {}

@@ -3,19 +3,23 @@ import os
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsRectItem, QGraphicsTextItem
 from PyQt5.QtGui import QBrush, QColor, QPainter
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMenu, QAction, QInputDialog
+from PyQt5.QtWidgets import QMenu, QAction, QInputDialog, QDialog
+
+from add_block_dialog import save_blocks, AddBlockDialog  # Import the function you mentioned
+
 
 class BlockDiagramView(QGraphicsView):
-    JSON_PATH = "blocks.json"  # You can change this path
+    
 
-    def __init__(self, parent=None):
+    def __init__(self, project_path, parent=None):
         super().__init__(parent) #add this to the parent window
         self.scene = QGraphicsScene() #create a canvas to create block chip
         self.setScene(self.scene) #set canvas
         self.setRenderHint(QPainter.Antialiasing) #Enables antialiasing, which smooths out jagged edges of graphics
         self.setBackgroundBrush(QBrush(Qt.white)) #Sets the background color or texture of the view (aanpassen naar grid can hiervoor gebruikt worden)
-
+        self.project_path = project_path
         self.blocks = []  # Keep track of blocks added (dict + rect + label)
+        self.json_path = os.path.join(self.project_path, "blocks.json")  # Use project-specific pat
 
         # Load blocks from JSON on startup
         self.load_blocks_from_file()
@@ -52,13 +56,12 @@ class BlockDiagramView(QGraphicsView):
         rect.setFlag(QGraphicsRectItem.ItemIsSelectable)
 
         # Create a text label item with the block's name
-        label = QGraphicsTextItem(name)
-
-        # Position the label slightly inside the rectangle, offset by 10 pixels
-        label.setPos(x + 10, y + 10)
+        label = QGraphicsTextItem(name, rect)
+        label.setPos(10, 10)  # Now relative to the top-left of the rect
 
         # Add the rectangle to the graphics scene so it appears in the view
         self.scene.addItem(rect)
+
 
         # Add the text label to the graphics scene
         self.scene.addItem(label)
@@ -67,8 +70,9 @@ class BlockDiagramView(QGraphicsView):
         self.blocks.append((block_data, rect, label))
 
     def load_blocks_from_file(self): #function to load the blocks out of the saved json file
-        if os.path.exists(self.JSON_PATH): #if the json file exist 
-            with open(self.JSON_PATH, 'r') as f: #open json file
+        
+        if os.path.exists(self.json_path): #if the json file exist 
+            with open(self.json_path, 'r') as f: #open json file
                 blocks = json.load(f) #load the blocks out of the json file
                 for block in blocks: #loop trough blocks
                     self.add_block(block) #add the blocks at the canvas
@@ -82,25 +86,35 @@ class BlockDiagramView(QGraphicsView):
         action = menu.exec_(event.globalPos())
         # Check if the selected action is "Add Block"
         if action == add_block_action:
-            # Map the click position from view (widget) coordinates to scene coordinates
+            # Convert click position from view to scene coordinates
             scene_pos = self.mapToScene(event.pos())
 
-            # Prompt the user to enter a block name using a simple input dialog
-            name, ok = QInputDialog.getText(self, "Block Name", "Enter block name:")
+            # Launch the custom dialog
+            dialog = AddBlockDialog(self.project_path)  # You must provide the project path here
+            dialog.x_edit.setText(str(int(scene_pos.x())))
+            dialog.y_edit.setText(str(int(scene_pos.y())))
+            dialog.w_edit.setText("120")  # default width
+            dialog.h_edit.setText("60")   # default height
 
-            # If the user clicked OK and entered a non-empty name
-            if ok and name:
-                # Create a dictionary representing the block's data
-                block_data = {
-                    "name": name,  # User-defined block name
-                    "gds_path": "",  # Placeholder for GDS path, can be updated later
-                    "position": [int(scene_pos.x()), int(scene_pos.y())],  # Click position in scene coords
-                    "size": [120, 60],  # Default block size
-                    "type": "analog"  # Default block type; could extend to ask the user
-                }
-
-                # Add the new block to the scene using the provided data
+            if dialog.exec_() == QDialog.Accepted:
+                block_data = dialog.block_data
                 self.add_block(block_data)
+    def save_blocks_to_file(self):
+        # Convert current blocks into dictionaries
+        block_dicts = [block for block, _, _ in self.blocks]
+        save_blocks(block_dicts, self.json_path)
+    def block_return(self):
+            
+        updated_blocks = []
 
-                # Save the updated list of blocks to file immediately
-                self.save_blocks_to_file()
+        for block_data, rect_item, _ in self.blocks:
+            # Get current position of the rectangle item
+            pos = rect_item.scenePos()
+
+            # Copy original data to avoid modifying original block_data
+            updated_block = dict(block_data)
+            updated_block['position'] = [int(pos.x()), int(pos.y())]
+
+            updated_blocks.append(updated_block)
+
+        return updated_blocks

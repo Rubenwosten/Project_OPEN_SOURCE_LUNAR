@@ -1,0 +1,12 @@
+VCD info: dumpfile inverter_tb.vcd opened for output.
+0: y_tb=1
+2000: y_tb=0
+7000: y_tb=1
+13000: y_tb=0
+17000: y_tb=1
+23000: y_tb=0
+27000: y_tb=1
+33000: y_tb=0
+37000: y_tb=1
+43000: y_tb=0
+47000: y_tb=1

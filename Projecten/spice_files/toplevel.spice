@@ -1,0 +1,43 @@
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/toplevel.sch
+**.subckt toplevel VOUT
+*.opin VOUT
+X1 net1 v_sensor
+X2 net1 net2 Filter
+X3 net2 net3 net5 net6 adc
+X5 net3 net4 inverter
+X6 net4 net5 net6 net7 dac
+X7 net7 VOUT RL
+**.ends
+
+* expanding   symbol:  /home/ruben/eda_tools/xschem-src/projects/test_sim/v_sensor.sym # of pins=1
+** sym_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/v_sensor.sym
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/v_sensor.sch
+.subckt v_sensor vout
+*.opin vout
+V1 vout GND sin(0 1 100MEG 1NS 1E10)
+.ends
+
+
+* expanding   symbol:  /home/ruben/eda_tools/xschem-src/projects/test_sim/Filter.sym # of pins=2
+** sym_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/Filter.sym
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/Filter.sch
+.subckt Filter VINF VOUTF
+*.ipin VINF
+*.opin VOUTF
+R1 VINF VOUTF 1k m=1
+C1 VOUTF GND 1p m=1
+.ends
+
+
+* expanding   symbol:  /home/ruben/eda_tools/xschem-src/projects/test_sim/RL.sym # of pins=2
+** sym_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/RL.sym
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/RL.sch
+.subckt RL VinL Vout
+*.ipin VinL
+*.opin Vout
+R1 Vout GND 1k m=1
+R2 VinL Vout 1k m=1
+.ends
+
+.GLOBAL GND
+.end

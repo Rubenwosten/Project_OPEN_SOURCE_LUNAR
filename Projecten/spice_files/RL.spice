@@ -1,0 +1,9 @@
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/RL.sch
+**.subckt RL VinL Vout
+*.ipin VinL
+*.opin Vout
+R1 Vout GND 1k m=1
+R2 VinL Vout 1k m=1
+**.ends
+.GLOBAL GND
+.end

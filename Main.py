@@ -90,16 +90,18 @@ class MainWindow(QMainWindow): #main class
     def project_wizard_back(self): #functie om scherm te sluiten mocht het project niet gemaakt te worden.
         self.project_wizard.close() #sluit scherm
 
-    def start_project(self, project_name, config_path, input_files): # Start functie als het project gecreeerd is
+    def start_project(self, project_path, project_name, config_path, input_files): # Start functie als het project gecreeerd is
         self.project_wizard.close() #close setup screen
-        self.main_project_window = MainProjectWindow(project_name) #activate main project window code
+        self.main_project_window = MainProjectWindow(project_path, project_name) #activate main project window code
         self.main_project_window.show() # show window
 
 
     def open_project(self): #open project logic
-        folder = QFileDialog.getExistingDirectory(self, "Open Project Folder") #choose project folder to open in files on system
+        folder = QFileDialog.getExistingDirectory(self, "Open Project Folder") #choose project folder to open in files on 
+        projectnaam = os.path.basename(folder)
+
         if folder: # if a folder is choosen open main window
-            self.main_project_window = MainProjectWindow(folder) #activate main window code
+            self.main_project_window = MainProjectWindow(folder, projectnaam) #activate main window code
             self.main_project_window.show() #show main window
 
     def open_settings(self): #settings logic

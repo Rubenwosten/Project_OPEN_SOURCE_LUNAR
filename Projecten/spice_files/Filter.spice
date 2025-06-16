@@ -1,0 +1,9 @@
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/Filter.sch
+**.subckt Filter VINF VOUTF
+*.ipin VINF
+*.opin VOUTF
+R1 VINF VOUTF 1k m=1
+C1 VOUTF GND 1p m=1
+**.ends
+.GLOBAL GND
+.end

@@ -1,0 +1,25 @@
+* Analog block group 0 simulation
+.subckt v_sensor vout
+*.opin vout
+V1 vout GND sin(0 1 100MEG 1NS 1NS)
+.ends v_sensor
+
+.subckt Filter VINF VOUTF
+*.ipin VINF
+*.opin VOUTF
+R1 VINF VOUTF 1k m=1
+C1 VOUTF GND 1p m=1
+.ends Filter
+
+
+
+X1 net1 v_sensor
+X2 net1 net2 Filter
+
+.control
+   tran 50.0000p 50.0000n
+   .probe
+   wrdata net1.txt V(net1)
+   wrdata net2.txt V(net2)
+.endc
+.end

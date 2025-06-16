@@ -1,0 +1,7 @@
+** sch_path: /home/ruben/eda_tools/xschem-src/projects/test_sim/v_sensor.sch
+**.subckt v_sensor vout
+*.opin vout
+V1 vout GND sin(0 1 100MEG 1NS 1NS)
+**.ends
+.GLOBAL GND
+.end

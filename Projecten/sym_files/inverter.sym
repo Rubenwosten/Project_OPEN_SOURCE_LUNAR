@@ -1,0 +1,25 @@
+v {xschem version=3.4.7RC file_version=1.2}
+G {}
+K {SYMATTR Prefix X
+SYMATTR Value inverter
+SYMATTR Type block
+SYMATTR File inverter.v
+SYMATTR ModelType digital
+type=block
+format="@name @pinlist @symname"
+template="name=X1"}
+V {}
+S {}
+E {}
+L 4 40 -0 55 -0 {}
+L 4 55 -20 55 -0 {}
+L 4 55 -20 105 -20 {}
+L 4 105 -20 105 15 {}
+L 4 55 15 105 15 {}
+L 4 55 0 55 15 {}
+L 4 105 0 130 -0 {}
+B 5 37.5 -2.5 42.5 2.5 {name=a
+dir=in}
+B 5 127.5 -2.5 132.5 2.5 {name=y
+dir=out}
+T {@name} 60 -10 0 0 0.4 0.4 {}

@@ -1,0 +1,19 @@
+* Analog block group 1 simulation
+.subckt RL VinL Vout
+*.ipin VinL
+*.opin Vout
+R1 Vout GND 1k m=1
+R2 VinL Vout 1k m=1
+.ends RL
+
+
+Vnet7 net7 0 PWL(0n 0 net7_placeholder)
+
+X7 net7 VOUT RL
+
+.control
+   tran sim_step_placeholder sim_time_placeholder
+   .probe
+   wrdata VOUT.txt V(VOUT)
+.endc
+.end
