@@ -1,0 +1,10 @@
+%Error: Cannot find file containing module: /workspace/designs/radio/src/radio.v
+%Error: This may be because there's no search path specified with -I<dir>.
+        ... Looked in:
+             /workspace/designs/radio/src/radio.v
+             /workspace/designs/radio/src/radio.v.v
+             /workspace/designs/radio/src/radio.v.sv
+             obj_dir//workspace/designs/radio/src/radio.v
+             obj_dir//workspace/designs/radio/src/radio.v.v
+             obj_dir//workspace/designs/radio/src/radio.v.sv
+%Error: Exiting due to 2 error(s)

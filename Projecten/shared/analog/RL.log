@@ -1,0 +1,4 @@
+Stray ".ends" card: .ends rl
+Circuit: .subckt RL VINL VOUT
+
+Fatal Error: No analysis request found.

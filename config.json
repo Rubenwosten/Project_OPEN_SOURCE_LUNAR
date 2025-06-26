@@ -1,4 +1,5 @@
 {
     "design_type": "Mixed Signal",
-    "automation_level": "Semi"
+    "automation_level": "Semi",
+    "shared_path": "C:/Users/Ruben/Project_lunar/Project_OPEN_SOURCE_LUNAR/Projecten/shared"
 }

@@ -1,0 +1,391 @@
+{
+  "global_signals": [
+    {
+      "actual": "GND",
+      "formal": "supply0",
+      "prefix": "global_power"
+    },
+    {
+      "actual": "VDD",
+      "formal": "supply1",
+      "prefix": "global_power"
+    }
+  ],
+  "leaves": [
+    {
+      "abstract_name": "NMOS_S_72264633",
+      "bbox": [
+        0,
+        0,
+        2580,
+        7560
+      ],
+      "concrete_name": "NMOS_S_72264633_X1_Y1",
+      "terminals": [
+        {
+          "name": "D",
+          "rect": [
+            260,
+            280,
+            1460,
+            560
+          ]
+        },
+        {
+          "name": "G",
+          "rect": [
+            260,
+            4480,
+            1460,
+            4760
+          ]
+        },
+        {
+          "name": "S",
+          "rect": [
+            1580,
+            680,
+            1860,
+            6880
+          ]
+        }
+      ]
+    },
+    {
+      "abstract_name": "PMOS_S_19745913",
+      "bbox": [
+        0,
+        0,
+        2580,
+        7560
+      ],
+      "concrete_name": "PMOS_S_19745913_X1_Y1",
+      "terminals": [
+        {
+          "name": "D",
+          "rect": [
+            260,
+            280,
+            1460,
+            560
+          ]
+        },
+        {
+          "name": "G",
+          "rect": [
+            260,
+            4480,
+            1460,
+            4760
+          ]
+        },
+        {
+          "name": "S",
+          "rect": [
+            1580,
+            680,
+            1860,
+            6880
+          ]
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "abstract_name": "RING",
+      "bbox": [
+        0,
+        0,
+        7740,
+        15120
+      ],
+      "concrete_name": "RING_0",
+      "constraints": [
+        {
+          "constraint": "PowerPorts",
+          "ports": [
+            "VDD"
+          ],
+          "propagate": true
+        },
+        {
+          "constraint": "GroundPorts",
+          "ports": [
+            "GND"
+          ],
+          "propagate": true
+        }
+      ],
+      "instances": [
+        {
+          "abstract_template_name": "STAGE2_INV_11671197_PG0",
+          "concrete_template_name": "STAGE2_INV_11671197_PG0_0",
+          "fa_map": [
+            {
+              "actual": "OUT",
+              "formal": "VI"
+            },
+            {
+              "actual": "NET2",
+              "formal": "VO"
+            }
+          ],
+          "instance_name": "X_XM1_XM2_XM4_XM5",
+          "transformation": {
+            "oX": 7740,
+            "oY": 0,
+            "sX": -1,
+            "sY": 1
+          }
+        },
+        {
+          "abstract_template_name": "INV_1445845_PG0",
+          "concrete_template_name": "INV_1445845_PG0_0",
+          "fa_map": [
+            {
+              "actual": "NET2",
+              "formal": "I"
+            },
+            {
+              "actual": "OUT",
+              "formal": "ZN"
+            }
+          ],
+          "instance_name": "X_XM3_XM6",
+          "transformation": {
+            "oX": 2580,
+            "oY": 0,
+            "sX": -1,
+            "sY": 1
+          }
+        }
+      ],
+      "parameters": [
+        "OUT"
+      ]
+    },
+    {
+      "abstract_name": "STAGE2_INV_11671197_PG0",
+      "bbox": [
+        0,
+        0,
+        5160,
+        15120
+      ],
+      "concrete_name": "STAGE2_INV_11671197_PG0_0",
+      "constraints": [
+        {
+          "constraint": "SymmetricBlocks",
+          "direction": "V",
+          "pairs": [
+            [
+              "X_M0"
+            ],
+            [
+              "X_M1"
+            ]
+          ]
+        },
+        {
+          "constraint": "SymmetricBlocks",
+          "direction": "V",
+          "pairs": [
+            [
+              "X_M2"
+            ],
+            [
+              "X_M3"
+            ]
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "abstract_template_name": "NMOS_S_72264633",
+          "concrete_template_name": "NMOS_S_72264633_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "VM",
+              "formal": "D"
+            },
+            {
+              "actual": "VI",
+              "formal": "G"
+            },
+            {
+              "actual": "GND",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M0",
+          "transformation": {
+            "oX": 2580,
+            "oY": 7560,
+            "sX": 1,
+            "sY": -1
+          }
+        },
+        {
+          "abstract_template_name": "NMOS_S_72264633",
+          "concrete_template_name": "NMOS_S_72264633_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "VO",
+              "formal": "D"
+            },
+            {
+              "actual": "VM",
+              "formal": "G"
+            },
+            {
+              "actual": "GND",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M2",
+          "transformation": {
+            "oX": 2580,
+            "oY": 7560,
+            "sX": -1,
+            "sY": -1
+          }
+        },
+        {
+          "abstract_template_name": "PMOS_S_19745913",
+          "concrete_template_name": "PMOS_S_19745913_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "VM",
+              "formal": "D"
+            },
+            {
+              "actual": "VI",
+              "formal": "G"
+            },
+            {
+              "actual": "VDD",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M1",
+          "transformation": {
+            "oX": 2580,
+            "oY": 7560,
+            "sX": 1,
+            "sY": 1
+          }
+        },
+        {
+          "abstract_template_name": "PMOS_S_19745913",
+          "concrete_template_name": "PMOS_S_19745913_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "VO",
+              "formal": "D"
+            },
+            {
+              "actual": "VM",
+              "formal": "G"
+            },
+            {
+              "actual": "VDD",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M3",
+          "transformation": {
+            "oX": 2580,
+            "oY": 7560,
+            "sX": -1,
+            "sY": 1
+          }
+        }
+      ],
+      "parameters": [
+        "VI",
+        "VO"
+      ]
+    },
+    {
+      "abstract_name": "INV_1445845_PG0",
+      "bbox": [
+        0,
+        0,
+        2580,
+        15120
+      ],
+      "concrete_name": "INV_1445845_PG0_0",
+      "constraints": [
+        {
+          "constraint": "SymmetricBlocks",
+          "direction": "V",
+          "pairs": [
+            [
+              "X_M0"
+            ],
+            [
+              "X_M1"
+            ]
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "abstract_template_name": "NMOS_S_72264633",
+          "concrete_template_name": "NMOS_S_72264633_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "ZN",
+              "formal": "D"
+            },
+            {
+              "actual": "I",
+              "formal": "G"
+            },
+            {
+              "actual": "GND",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M0",
+          "transformation": {
+            "oX": 0,
+            "oY": 7560,
+            "sX": 1,
+            "sY": -1
+          }
+        },
+        {
+          "abstract_template_name": "PMOS_S_19745913",
+          "concrete_template_name": "PMOS_S_19745913_X1_Y1",
+          "fa_map": [
+            {
+              "actual": "ZN",
+              "formal": "D"
+            },
+            {
+              "actual": "I",
+              "formal": "G"
+            },
+            {
+              "actual": "VDD",
+              "formal": "S"
+            }
+          ],
+          "instance_name": "X_M1",
+          "transformation": {
+            "oX": 0,
+            "oY": 7560,
+            "sX": 1,
+            "sY": 1
+          }
+        }
+      ],
+      "parameters": [
+        "I",
+        "ZN"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+2025-06-26 04:41:48 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RING.sp subckt=RING, flat=0
+2025-06-26 04:41:48 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:41:48 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 167, in schematic2layout
+    primitive_lib = generate_hierarchy(netlist, subckt, topology_dir, flatten, pdk_dir)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 35, in generate_hierarchy
+    primitives = PrimitiveLibrary(ckt_data, pdk_dir).gen_primitive_collateral()
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/gen_abstract_name.py", line 53, in gen_primitive_collateral
+    self.gen_primitive_def(ele)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/gen_abstract_name.py", line 122, in gen_primitive_def
+    assert False, f"Unmatched generator for this instance {element}, please fix netlist "
+AssertionError: Unmatched generator for this instance model='SKY130_FD_PR__NFET_01V8' name='X1' pins={'D': 'GND', 'G': 'LI_405_1579#', 'S': 'OUT', 'B': 'GND'} parameters={'W': '2.1', 'L': '0.15', 'NFIN': '1', 'NF': '2', 'M': '1', 'PARALLEL': '1', 'STACK': '1'} abstract_name=None, please fix netlist 

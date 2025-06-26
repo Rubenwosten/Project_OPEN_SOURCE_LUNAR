@@ -1,0 +1,26 @@
+2025-06-26 04:59:30 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RING.sp subckt=RING, flat=0
+2025-06-26 04:59:30 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:59:30 align.compiler.user_const INFO : Reading constraint file: [PosixPath('/workspace/analog/flatten_netlist/RING.const.json')]
+2025-06-26 04:59:30 align.compiler.compiler INFO : Completed topology identification.
+2025-06-26 04:59:30 align.pnr.main INFO : Running Place & Route for RING
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file RING.pnr.const.json
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file STAGE2_INV_11671197_PG0.pnr.const.json
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file INV_1445845_PG0.pnr.const.json
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file RING.pnr.const.json
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file STAGE2_INV_11671197_PG0.pnr.const.json
+2025-06-26 04:59:31 align.pnr.build_pnr_model INFO : Reading contraint json file INV_1445845_PG0.pnr.const.json
+2025-06-26 04:59:31 align.pnr.placer INFO : Starting bottom-up placement on STAGE2_INV_11671197_PG0 1
+2025-06-26 04:59:31 PnR.placer.SeqPair.SeqPair INFO : Enumerated search
+2025-06-26 04:59:31 PnR.placer.Placer.PlacementCoreAspectRatio_ILP INFO : Exhausted all permutations of seq pairs and found 1 placement solution(s)
+2025-06-26 04:59:33 align.pnr.placer INFO : Starting bottom-up placement on INV_1445845_PG0 2
+2025-06-26 04:59:33 PnR.placer.SeqPair.SeqPair INFO : Enumerated search
+2025-06-26 04:59:33 PnR.placer.Placer.PlacementCoreAspectRatio_ILP INFO : Exhausted all permutations of seq pairs and found 1 placement solution(s)
+2025-06-26 04:59:34 align.pnr.placer INFO : Starting bottom-up placement on RING 0
+2025-06-26 04:59:34 PnR.placer.SeqPair.SeqPair INFO : Enumerated search
+2025-06-26 04:59:34 PnR.placer.Placer.PlacementCoreAspectRatio_ILP INFO : Exhausted all permutations of seq pairs and found 1 placement solution(s)
+2025-06-26 04:59:43 align.pnr.build_pnr_model INFO : Reading contraint json file RING.pnr.const.json
+2025-06-26 04:59:43 align.pnr.build_pnr_model INFO : Reading contraint json file STAGE2_INV_11671197_PG0.pnr.const.json
+2025-06-26 04:59:43 align.pnr.build_pnr_model INFO : Reading contraint json file INV_1445845_PG0.pnr.const.json
+2025-06-26 04:59:43 PnR.placer.SeqPair.SeqPair INFO : Enumerated search
+2025-06-26 04:59:45 PnR.placer.SeqPair.SeqPair INFO : Enumerated search
+2025-06-26 04:59:48 PnR.placer.SeqPair.SeqPair INFO : Enumerated search

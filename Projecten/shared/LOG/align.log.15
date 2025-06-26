@@ -1,0 +1,15 @@
+2025-06-26 04:40:43 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RING.sp subckt=RING, flat=0
+2025-06-26 04:40:43 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:40:43 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 167, in schematic2layout
+    primitive_lib = generate_hierarchy(netlist, subckt, topology_dir, flatten, pdk_dir)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 27, in generate_hierarchy
+    ckt_data, primitive_library = compiler_input(
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 84, in compiler_input
+    ckt_data = create_data.read_inputs(design_name)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/create_database.py", line 33, in read_inputs
+    assert top_subckt, f"{name.upper()} not found in library {[e.name for e in self.lib]}"
+AssertionError: RING not found in library ['NMOS', 'PMOS', 'CAP', 'RES', 'IND']

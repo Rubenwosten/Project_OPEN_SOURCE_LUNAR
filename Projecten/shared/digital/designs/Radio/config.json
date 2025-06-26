@@ -1,0 +1,16 @@
+{
+  "DESIGN_NAME": "radio",
+  "VERILOG_FILES": "/workspace/digital/designs/radio/src/radio.v",
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10,
+  "SYNTH_ELABORATE_ONLY": 0,
+  "TOP_MODULE": "radio",
+  "CONSTRAINTS": "/workspace/digital/designs/radio/constraints.sdc",
+  "PDK": "sky130A",
+  "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+  "STD_CELL_LIBRARY_OPT": "sky130_fd_sc_hd",
+  "PDK_ROOT": "/openlane/pdks",
+  "GDS": "/workspace/gds",
+  "GPL_CELL_PADDING": 1,
+  "OUTPUT_CAP_LOAD": 0
+}

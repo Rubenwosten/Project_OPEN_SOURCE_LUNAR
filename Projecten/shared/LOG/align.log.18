@@ -1,0 +1,17 @@
+2025-06-26 04:31:43 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RL.sp subckt=RL, flat=0
+2025-06-26 04:31:43 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:31:43 align.compiler.compiler INFO : Power and ground nets not found. Power grid will not be constructed.
+2025-06-26 04:31:43 align.compiler.compiler INFO : Completed topology identification.
+2025-06-26 04:31:43 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 181, in schematic2layout
+    primitives = generate_primitives(primitive_lib, pdk_dir, primitive_dir, netlist_dir, blackbox_dir, scale)
+  File "/usr/local/lib/python3.10/dist-packages/align/primitive/main.py", line 145, in generate_primitives
+    generate_primitive_param(primitive, primitives, pdk_dir)
+  File "/usr/local/lib/python3.10/dist-packages/align/primitive/main.py", line 173, in generate_primitive_param
+    rc = modules.gen_param(subckt, primitives, pdk_dir)
+  File "/home/align/pdk/SKY130_PDK/gen_param.py", line 98, in gen_param
+    assert float(values["VALUE"]) or float(values["R"]), f"unidentified size {values['VALUE']} for {name}"
+ValueError: could not convert string to float: 'RES1'

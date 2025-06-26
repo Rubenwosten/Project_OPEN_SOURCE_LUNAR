@@ -1,0 +1,31 @@
+2025-06-26 04:38:10 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RING.sp subckt=RING, flat=0
+2025-06-26 04:38:10 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:38:10 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 167, in _process_instance
+    self._scope[-1].elements.append(Instance(name=name, model=model.name,
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/types.py", line 75, in __init__
+    super().__init__(*args, **kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for Instance
+parameters
+  Instance parameters must be a subset of Model parameters (type=assertion_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 167, in schematic2layout
+    primitive_lib = generate_hierarchy(netlist, subckt, topology_dir, flatten, pdk_dir)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 27, in generate_hierarchy
+    ckt_data, primitive_library = compiler_input(
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 76, in compiler_input
+    ckt_parser.parse(lines)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 88, in parse
+    self._dispatch(cache)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 106, in _dispatch
+    self._process_instance(token.value.upper(), args, kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 171, in _process_instance
+    assert False, f"could not identify device parameters {name} {kwargs} \
+AssertionError: could not identify device parameters X0 {'AD': 0.294, 'PD': 2.38, 'AS': 0.5565, 'PS': 4.73, 'W': 2.1, 'L': 0.15}                     allowed parameters of model SKY130_FD_PR__NFET_01V8 are {'W': '1', 'L': '1', 'NFIN': '1', 'NF': '2', 'M': '1', 'PARALLEL': '1', 'STACK': '1'}

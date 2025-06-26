@@ -3,6 +3,9 @@ from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel,
     QPushButton, QFileDialog, QMessageBox, QAction
 ) #layout widgets
+
+from PyQt5.QtGui import QPixmap, QPalette, QBrush
+from PyQt5.QtCore import Qt
 from settings_window import SettingsWindow #settings file
 from project_wizard import ProjectWizard #project maak file
 from main_project_window import MainProjectWindow #main window om project te bewerken file
@@ -17,11 +20,13 @@ class MainWindow(QMainWindow): #main class
         super().__init__()
 
         self.setWindowTitle("Analog IC Toolchain") #title of window
-        self.setGeometry(300, 200, 500, 400) #grootte window
+        self.setGeometry(200, 100, 700, 800) #grootte window
 
         # Settings state
         self.design_type = "-----" #bij begin als er nog nooit gewerkt is design type van ic is niks
         self.automation_level = "-----" #bij begin als er nog nooit gewerkt is hoeveelheid automatie type is niks
+        self.shared_path = "-----"
+
         self.load_config() #load configuration file.
         self.init_ui() #load ui functie bij intizalizatie
 
@@ -29,6 +34,13 @@ class MainWindow(QMainWindow): #main class
         # Create central widget (main screen)
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
+    
+        background = QPixmap(r"C:/Users/Ruben/OneDrive/Afbeeldingen/Schermopnamen/background_main.png")
+        scaled_bg = background.scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(scaled_bg))
+        central_widget.setAutoFillBackground(True)
+        central_widget.setPalette(palette)
 
         layout = QVBoxLayout() #layout opslag van main screen
 
@@ -80,7 +92,9 @@ class MainWindow(QMainWindow): #main class
         if self.design_type == "-----": #to create new project ic design type needs to be selected
             QMessageBox.warning(self, "Missing Settings", "Please select a design type in Settings before creating a new project.") #warning box met uitleg want dat is handig
         elif self.automation_level == "-----": #configure automation level first.
-            QMessageBox.warning(self, "Missing Settings", "Please select an automation level in Settings before creating a new project.") #warning box met uitleg.
+            QMessageBox.warning(self, "Missing Settings", "Please select an automation level in Settings before creating a new project.")
+        elif self.shared_path == "-----": #configure automation level first.
+            QMessageBox.warning(self, "Missing Settings", "Please select an shared folder path in Settings before creating a new project.") #warning box met uitleg.
         else: #checks gedaan dan naar project wizard scherm om een project te maken
             self.project_wizard = ProjectWizard(
                 return_callback=self.start_project,
@@ -92,7 +106,7 @@ class MainWindow(QMainWindow): #main class
 
     def start_project(self, project_path, project_name, config_path, input_files): # Start functie als het project gecreeerd is
         self.project_wizard.close() #close setup screen
-        self.main_project_window = MainProjectWindow(project_path, project_name) #activate main project window code
+        self.main_project_window = MainProjectWindow(project_path, project_name, self.shared_path) #activate main project window code
         self.main_project_window.show() # show window
 
 
@@ -101,7 +115,7 @@ class MainWindow(QMainWindow): #main class
         projectnaam = os.path.basename(folder)
 
         if folder: # if a folder is choosen open main window
-            self.main_project_window = MainProjectWindow(folder, projectnaam) #activate main window code
+            self.main_project_window = MainProjectWindow(folder, projectnaam, self.shared_path) #activate main window code
             self.main_project_window.show() #show main window
 
     def open_settings(self): #settings logic
@@ -111,7 +125,8 @@ class MainWindow(QMainWindow): #main class
     def save_config(self): # save function to update the json file
         config = {
         "design_type": self.design_type,
-        "automation_level": self.automation_level
+        "automation_level": self.automation_level,
+        "shared_path": self.shared_path
     } #configurations (uitbereiden)
         with open(CONFIG_FILE, "w") as f: #open config file
             json.dump(config, f, indent=4) #update config file 
@@ -122,6 +137,7 @@ class MainWindow(QMainWindow): #main class
                 config = json.load(f) #save file in python variable
                 self.design_type = config.get("design_type", "-----") #load configuration value of design type
                 self.automation_level = config.get("automation_level", "-----") #load configuration value of automation level
+                self.shared_path = config.get("shared_path","-----")
 
 if __name__ == "__main__": #start code
     app = QApplication(sys.argv) #start app

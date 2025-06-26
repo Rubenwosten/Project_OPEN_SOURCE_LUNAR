@@ -1,0 +1,19 @@
+2025-06-26 04:32:49 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RL.sp subckt=RL, flat=0
+2025-06-26 04:32:49 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:32:49 align.compiler.compiler INFO : Power and ground nets not found. Power grid will not be constructed.
+2025-06-26 04:32:49 align.compiler.compiler INFO : Completed topology identification.
+2025-06-26 04:32:49 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 181, in schematic2layout
+    primitives = generate_primitives(primitive_lib, pdk_dir, primitive_dir, netlist_dir, blackbox_dir, scale)
+  File "/usr/local/lib/python3.10/dist-packages/align/primitive/main.py", line 155, in generate_primitives
+    uc = generate_primitive(block_name, primitive_def,  ** block_args,
+  File "/usr/local/lib/python3.10/dist-packages/align/primitive/main.py", line 215, in generate_primitive
+    uc, _ = generate_Res(pdkdir, block_name, height, x_cells, y_cells, value[0], value[1])
+  File "/usr/local/lib/python3.10/dist-packages/align/primitive/main.py", line 108, in generate_Res
+    uc = generator(pdk, fin, finDummy)
+  File "/home/align/pdk/SKY130_PDK/res.py", line 15, in __init__
+    clg=ColoredCenterLineGrid( colors=['c1','c2'], pitch=self.pdk['Cap']['m1Pitch'], width=self.pdk['Cap']['m1Width']),
+KeyError: 'm1Pitch'

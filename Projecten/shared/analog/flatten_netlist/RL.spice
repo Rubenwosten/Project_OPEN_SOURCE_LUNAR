@@ -1,0 +1,6 @@
+** RL flat netlist
+*.IPIN VINL
+*.OPIN VOUT
+R1 VOUT GND 1K M=1
+R2 VINL VOUT 1K M=1
+.end

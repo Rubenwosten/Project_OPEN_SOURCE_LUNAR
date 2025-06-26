@@ -1,0 +1,18 @@
+{
+  "constraints": [
+    {
+      "ports": [
+        "VDD"
+      ],
+      "propagate": true,
+      "const_name": "PowerPorts"
+    },
+    {
+      "ports": [
+        "GND"
+      ],
+      "propagate": true,
+      "const_name": "GroundPorts"
+    }
+  ]
+}

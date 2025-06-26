@@ -1,2 +1,0 @@
-VCD info: dumpfile d_flip_flop_tb.vcd opened for output.
-0: q_tb=x

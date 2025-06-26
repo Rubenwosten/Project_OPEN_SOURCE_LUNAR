@@ -1,0 +1,280 @@
+
+===========================================================================
+report_checks -unconstrained
+===========================================================================
+======================= Typical Corner ===================================
+
+Startpoint: _164_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: busy (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock source latency
+     1    0.01    0.04    0.03    0.03 ^ clk (in)
+                                         clk (net)
+                  0.04    0.00    0.03 ^ clkbuf_0_clk/A (sky130_fd_sc_hd__clkbuf_16)
+     4    0.03    0.05    0.14    0.17 ^ clkbuf_0_clk/X (sky130_fd_sc_hd__clkbuf_16)
+                                         clknet_0_clk (net)
+                  0.05    0.00    0.17 ^ clkbuf_2_1__f_clk/A (sky130_fd_sc_hd__clkbuf_16)
+    10    0.02    0.04    0.13    0.30 ^ clkbuf_2_1__f_clk/X (sky130_fd_sc_hd__clkbuf_16)
+                                         clknet_2_1__leaf_clk (net)
+                  0.04    0.00    0.30 ^ _164_/CLK (sky130_fd_sc_hd__dfxtp_2)
+     8    0.02    0.07    0.37    0.67 v _164_/Q (sky130_fd_sc_hd__dfxtp_2)
+                                         rx_busy (net)
+                  0.07    0.00    0.67 v _078_/A (sky130_fd_sc_hd__buf_2)
+    10    0.02    0.06    0.18    0.85 v _078_/X (sky130_fd_sc_hd__buf_2)
+                                         _062_ (net)
+                  0.06    0.00    0.85 v _080_/A (sky130_fd_sc_hd__or2_1)
+     1    0.00    0.04    0.23    1.08 v _080_/X (sky130_fd_sc_hd__or2_1)
+                                         net14 (net)
+                  0.04    0.00    1.08 v output14/A (sky130_fd_sc_hd__buf_1)
+     1    0.00    0.01    0.07    1.15 v output14/X (sky130_fd_sc_hd__buf_1)
+                                         busy (net)
+                  0.01    0.00    1.15 v busy (out)
+                                  1.15   data arrival time
+
+                         10.00   10.00   clock clk (rise edge)
+                          0.00   10.00   clock network delay (propagated)
+                         -0.25    9.75   clock uncertainty
+                          0.00    9.75   clock reconvergence pessimism
+                         -2.00    7.75   output external delay
+                                  7.75   data required time
+-----------------------------------------------------------------------------
+                                  7.75   data required time
+                                 -1.15   data arrival time
+-----------------------------------------------------------------------------
+                                  6.60   slack (MET)
+
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+======================= Typical Corner ===================================
+
+No paths found.
+
+
+===========================================================================
+ report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+======================= Typical Corner ===================================
+
+
+max slew violations count Typical: 0
+max fanout violations count Typical: 0
+max cap violations count Typical: 0
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 194 unannotated drivers.
+ Rx
+ clk
+ enable
+ receive
+ send
+ tx_data[0]
+ tx_data[1]
+ tx_data[2]
+ tx_data[3]
+ tx_data[4]
+ tx_data[5]
+ tx_data[6]
+ tx_data[7]
+ _078_/X
+ _079_/X
+ _080_/X
+ _081_/X
+ _082_/Y
+ _083_/Y
+ _084_/X
+ _085_/X
+ _086_/X
+ _087_/X
+ _088_/X
+ _089_/X
+ _090_/X
+ _091_/X
+ _092_/X
+ _093_/X
+ _094_/X
+ _095_/X
+ _096_/X
+ _097_/X
+ _098_/X
+ _099_/X
+ _100_/X
+ _101_/X
+ _102_/X
+ _103_/X
+ _104_/X
+ _105_/X
+ _106_/Y
+ _107_/X
+ _108_/Y
+ _109_/X
+ _110_/X
+ _111_/X
+ _112_/X
+ _113_/X
+ _114_/X
+ _115_/X
+ _116_/X
+ _117_/X
+ _118_/X
+ _119_/Y
+ _120_/X
+ _121_/Y
+ _122_/X
+ _123_/X
+ _124_/X
+ _125_/Y
+ _126_/X
+ _127_/X
+ _128_/X
+ _129_/Y
+ _130_/X
+ _131_/X
+ _132_/Y
+ _133_/X
+ _134_/Y
+ _135_/X
+ _136_/X
+ _137_/Y
+ _138_/X
+ _139_/X
+ _140_/X
+ _141_/X
+ _142_/X
+ _143_/X
+ _144_/X
+ _145_/X
+ _146_/X
+ _147_/X
+ _148_/X
+ _149_/X
+ _150_/X
+ _151_/X
+ _152_/X
+ _153_/X
+ _154_/X
+ _155_/X
+ _156_/X
+ _157_/Q
+ _158_/Q
+ _159_/Q
+ _160_/Q
+ _161_/Q
+ _162_/Q
+ _163_/Q
+ _164_/Q
+ _165_/Q
+ _166_/Q
+ _167_/Q
+ _168_/Q
+ _169_/Q
+ _170_/Q
+ _171_/Q
+ _172_/Q
+ _173_/Q
+ _174_/Q
+ _175_/Q
+ _176_/Q
+ _177_/Q
+ _178_/Q
+ _179_/Q
+ _180_/Q
+ _181_/Q
+ _182_/Q
+ _183_/Q
+ _184_/Q
+ _185_/Q
+ _186_/Q
+ _187_/Q
+ _188_/Q
+ _189_/Q
+ clkbuf_0_clk/X
+ clkbuf_2_0__f_clk/X
+ clkbuf_2_1__f_clk/X
+ clkbuf_2_2__f_clk/X
+ clkbuf_2_3__f_clk/X
+ clkload0/Y
+ clkload1/Y
+ clkload2/Y
+ hold1/X
+ hold10/X
+ hold11/X
+ hold12/X
+ hold13/X
+ hold14/X
+ hold15/X
+ hold16/X
+ hold17/X
+ hold18/X
+ hold19/X
+ hold2/X
+ hold20/X
+ hold21/X
+ hold22/X
+ hold23/X
+ hold24/X
+ hold25/X
+ hold26/X
+ hold27/X
+ hold28/X
+ hold29/X
+ hold3/X
+ hold30/X
+ hold31/X
+ hold32/X
+ hold33/X
+ hold34/X
+ hold35/X
+ hold36/X
+ hold37/X
+ hold38/X
+ hold39/X
+ hold4/X
+ hold5/X
+ hold6/X
+ hold7/X
+ hold8/X
+ hold9/X
+ input1/X
+ input10/X
+ input11/X
+ input12/X
+ input2/X
+ input3/X
+ input4/X
+ input5/X
+ input6/X
+ input7/X
+ input8/X
+ input9/X
+ output13/X
+ output14/X
+ output15/X
+ output16/X
+ output17/X
+ output18/X
+ output19/X
+ output20/X
+ output21/X
+ output22/X
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 0
+max fanout violation count 0
+max cap violation count 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================

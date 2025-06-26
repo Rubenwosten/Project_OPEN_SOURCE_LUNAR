@@ -1,0 +1,10 @@
+2025-06-26 04:25:06 align.main ERROR : Netlist directory /workspace/analog/flatten_netlist/RL.sp doesn't exist. Please enter a valid directory path
+2025-06-26 04:25:06 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 157, in schematic2layout
+    netlist = extract_netlist_files(netlist_dir, netlist_file)
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 72, in extract_netlist_files
+    raise FileNotFoundError(2, 'No such netlist directory', netlist_dir)
+FileNotFoundError: [Errno 2] No such netlist directory: PosixPath('/workspace/analog/flatten_netlist/RL.sp')

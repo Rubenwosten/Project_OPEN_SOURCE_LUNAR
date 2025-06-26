@@ -1,0 +1,40 @@
+[
+  {
+    "constraint": "PowerPorts",
+    "ports": [
+      "VDD"
+    ],
+    "propagate": true
+  },
+  {
+    "constraint": "GroundPorts",
+    "ports": [
+      "GND"
+    ],
+    "propagate": true
+  },
+  {
+    "constraint": "GroupBlocks",
+    "instance_name": "X_XM1_XM2_XM4_XM5",
+    "instances": [
+      "XM1",
+      "XM2",
+      "XM4",
+      "XM5"
+    ],
+    "template_name": "STAGE2_INV",
+    "generator": null,
+    "constraints": null
+  },
+  {
+    "constraint": "GroupBlocks",
+    "instance_name": "X_XM3_XM6",
+    "instances": [
+      "XM3",
+      "XM6"
+    ],
+    "template_name": "INV",
+    "generator": null,
+    "constraints": null
+  }
+]

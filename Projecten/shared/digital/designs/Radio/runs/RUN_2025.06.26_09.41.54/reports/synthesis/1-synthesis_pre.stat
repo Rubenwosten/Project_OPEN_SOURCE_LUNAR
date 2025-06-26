@@ -1,0 +1,24 @@
+
+49. Printing statistics.
+
+=== radio ===
+
+   Number of wires:                 52
+   Number of wire bits:             84
+   Number of public wires:          15
+   Number of public wire bits:      47
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 71
+     $_ANDNOT_                       8
+     $_AND_                         11
+     $_MUX_                          9
+     $_NAND_                         2
+     $_ORNOT_                        1
+     $_OR_                           3
+     $_SDFFE_PN0P_                  29
+     $_SDFFE_PP0P_                   1
+     $_SDFF_PN0_                     3
+     $_XNOR_                         4
+

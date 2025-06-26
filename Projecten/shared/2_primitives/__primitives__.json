@@ -1,0 +1,40 @@
+{
+  "NMOS_S_72264633_X1_Y1": {
+    "value": 10,
+    "x_cells": 1,
+    "y_cells": 1,
+    "parameters": {
+      "M1": {
+        "W": "2.1E-06",
+        "L": "1.5E-07",
+        "NFIN": 10,
+        "NF": "2",
+        "M": "1",
+        "PARALLEL": "1",
+        "STACK": "1"
+      },
+      "model": "NMOS"
+    },
+    "abstract_template_name": "NMOS_S_72264633",
+    "concrete_template_name": "NMOS_S_72264633_X1_Y1"
+  },
+  "PMOS_S_19745913_X1_Y1": {
+    "value": 10,
+    "x_cells": 1,
+    "y_cells": 1,
+    "parameters": {
+      "M1": {
+        "W": "2.1E-06",
+        "L": "1.5E-07",
+        "NFIN": 10,
+        "NF": "2",
+        "M": "1",
+        "PARALLEL": "1",
+        "STACK": "1"
+      },
+      "model": "PMOS"
+    },
+    "abstract_template_name": "PMOS_S_19745913",
+    "concrete_template_name": "PMOS_S_19745913_X1_Y1"
+  }
+}

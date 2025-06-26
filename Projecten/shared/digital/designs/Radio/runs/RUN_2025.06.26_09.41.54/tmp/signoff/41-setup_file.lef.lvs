@@ -1,0 +1,1 @@
+lvs {/workspace/digital/designs/radio/runs/RUN_2025.06.26_09.41.54/results/signoff/radio.spice radio} {/workspace/digital/designs/radio/runs/RUN_2025.06.26_09.41.54/tmp/signoff/38-radio.pnl.v radio} /openlane/pdks/sky130A/libs.tech/netgen/sky130A_setup.tcl /workspace/digital/designs/radio/runs/RUN_2025.06.26_09.41.54/logs/signoff/41-radio.lef.lvs.log -json

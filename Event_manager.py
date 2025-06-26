@@ -158,9 +158,7 @@ class SimulatorManager:
                 'pin_to_net': pin_mapping,
                 'source_file': source_file
             }
-            print("[INFO] Net → Receivers mapping:")
-            for net, info in self.net_info.items():
-                print(f"  {net}: receivers={info['receivers']}, driver={info['driver']}")
+
 
     def classify_blocks(self):
         for blk, data in self.block_info.items(): #loop trough blocks
@@ -518,7 +516,7 @@ class SimulatorManager:
 
             last_time = first_time
             for t, v in event_list[1:]:
-                delta = int(round(t - last_time))
+                delta = float(round((t - last_time),2))
                 lines.append(f"#{delta} {tb_signal} = {v};")
                 last_time = t
 
@@ -827,6 +825,7 @@ class SimulatorManager:
             net_dir = os.path.join(self.windows_project_dir, "Output_data/Tussen_data/")
             analog_input, digital_input = self.build_signal_inputs(analog_inputs,digital_inputs,net_dir)
             output = sim_module.simulate(analog_input,digital_input)
+            print (output)
             output_nets = self.block_info[blk]['outputs']
             self.store_digital_net(output_nets,output)
   
@@ -884,7 +883,8 @@ class SimulatorManager:
 
         for i in range(1, len(values)):
             if values[i] != last_value:
-                time_ns = round(times[i] * 1e9)
+                time_ns = round(times[i] * 1e9,2)
+                print (time_ns)
                 event_list.append(f"{time_ns}n {values[i]}")
                 last_value = values[i]
                 if not event_found:
@@ -892,7 +892,7 @@ class SimulatorManager:
                         event_found = True
                         event_timestamp = time_ns
                         break
-
+        print (event_list)
         return " ".join(event_list), event_timestamp
 
     def Extract_value_event_digital(self, data):
@@ -1010,20 +1010,20 @@ class SimulatorManager:
 
                 if output_type == 'analog':
                     # → Store as PWL for analog receivers
-                    pwl_str = " ".join([f"{int(round(t))}n {v}" for t, v in zip(cropped_times, cropped_values)])
+                    pwl_str = " ".join([f"{float(round(t,2))}n {v}" for t, v in zip(cropped_times, cropped_values)])
                     self.net_info[net_name]['value'] = pwl_str
 
                     # Save to file
                     with open(out_path, 'w') as f:
                         for t, v in zip(cropped_times, cropped_values):
-                            f.write(f"{int(round(t))} {v}\n")
+                            f.write(f"{float(round(t,2))} {v}\n")
 
                 elif output_type == 'digital':
                     # → Store transitions for digital receivers
                     event_array = []
                     last_val = None
                     for t, v in zip(cropped_times, cropped_values):
-                        t_int = int(round(t))
+                        t_int = float(round(t,2))
                         v_int = int(v)
                         if last_val is None or v_int != last_val:
                             event_array.append([t_int, v_int])
@@ -1052,18 +1052,32 @@ class SimulatorManager:
                             f.write(f"{t} {v}\n")
 
             elif category == 'digital':
+                
                 times = data[:, 0] / 1000  # convert from ps to ns
                 values = data[:, 1]
-
-                # Find all changes
+                
+                
                 event_array = []
-                last_val = values[0]
-                event_array.append([int(round(times[0])), int(last_val)])
+                seen_times = set()
+
+                # Round initial time and add first event
+                t0 = int(round(times[0]))
+                v0 = int(values[0])
+                event_array.append([t0, v0])
+                seen_times.add(t0)
+                last_val = v0
 
                 for t, v in zip(times[1:], values[1:]):
-                    if v != last_val:
-                        event_array.append([int(round(t)), int(v)])
-                        last_val = v
+                    t_int = float(round(t,2))
+                    v_int = int(v)
+
+                    if t_int in seen_times:
+                        continue  # Skip duplicate time
+
+                    if v_int != last_val:
+                        event_array.append([t_int, v_int])
+                        seen_times.add(t_int)
+                        last_val = v_int
 
                 # Store complete event list
                 self.net_info[net_name]['value'] = np.array(event_array)
@@ -1079,10 +1093,6 @@ class SimulatorManager:
 
                     if blk not in self.digital_input_events:
                         self.digital_input_events[blk] = {}
-                    if pin not in self.digital_input_events[blk]:
-                        self.digital_input_events[blk][pin] = []
-
-                    # Store the full event list (overwrite, not append!)
                     self.digital_input_events[blk][pin] = list(event_array)
 
                 # Write to output file
@@ -1112,12 +1122,11 @@ class SimulatorManager:
             if event is None or event <= self.offset * 1e9:
                 print("[SIM] No new event or stuck at same time. Ending simulation.")
                 break
-            # ✅ Extract values BEFORE next Replace
-            print(self.digital_input_events)
-            print(f"[SIM] Next event at: {event} ns")
-            self.extract_netvalue(event)
-            self.offset = event / 1e9  # Update simulation time
 
+            # ✅ Extract values BEFORE next Replace
+            self.extract_netvalue(event)
+
+            self.offset = event / 1e9  # Update simulation time
 
 
 

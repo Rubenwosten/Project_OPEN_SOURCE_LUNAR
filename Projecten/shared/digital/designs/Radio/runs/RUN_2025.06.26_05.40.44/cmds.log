@@ -1,0 +1,30 @@
+Thu Jun 26 05:40:48 +0000 2025 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/lefutil.py get_metal_layers -o /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/layers.list /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef}"
+
+Thu Jun 26 05:40:48 +0000 2025 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/merged.nom.lef -i /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef {/openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Thu Jun 26 05:40:48 +0000 2025 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/merged.min.lef -i /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__min.tlef {/openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Thu Jun 26 05:40:49 +0000 2025 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/merged.max.lef -i /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__max.tlef {/openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Thu Jun 26 05:40:49 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLib.py --output /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/synthesis/merged.lib --name sky130A_merged /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib}"
+
+Thu Jun 26 05:40:49 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/synthesis/trimmed.lib.exclude.list --output /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/synthesis/trimmed.lib /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/synthesis/merged.lib}"
+
+Thu Jun 26 05:40:49 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts.lib.exclude.list --output /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts.lib /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib}"
+
+Thu Jun 26 05:40:50 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts-fastest.lib.exclude.list --output /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts-fastest.lib /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib}"
+
+Thu Jun 26 05:40:51 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts-slowest.lib.exclude.list --output /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/cts/cts-slowest.lib /openlane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib}"
+
+Thu Jun 26 05:40:52 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/new_tracks.py -i /openlane/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info -o /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/routing/config.tracks}"
+
+Thu Jun 26 05:40:52 +0000 2025 - Executing "{echo {OpenLane } > /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/OPENLANE_COMMIT}"
+
+Thu Jun 26 05:40:52 +0000 2025 - Executing "{yosys -c /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/yosys/blackbox.tcl}"
+
+Thu Jun 26 05:40:52 +0000 2025 - Executing "{verilator -Wall --lint-only --Wno-DECLFILENAME --top-module radio /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/tmp/synthesis/blackbox/sky130_fd_sc_hd__blackbox.v /workspace/designs/radio/src/radio.v -Wno-fatal --relative-includes |& tee /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/logs/synthesis/linter.log /dev/null}"
+
+Thu Jun 26 05:40:53 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/write_runtime.py --conclude --seconds --time-in 1750916452 {flow failed}}"
+
+Thu Jun 26 05:40:53 +0000 2025 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/generate_reports.py -d /workspace/digital/designs/Radio --design_name radio --tag RUN_2025.06.26_05.40.44 --output_file /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/reports/metrics.csv --man_report /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44/reports/manufacturability.rpt --run_path /workspace/digital/designs/Radio/runs/RUN_2025.06.26_05.40.44}"
+

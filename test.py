@@ -1,3 +1,15 @@
+commands_ngspice_1 = ['docker-compose', 'run', 'analog']
+commands_ngspice_2 = ['ngspice','-b', 'file_path']
+
+commands_xschem_1 = ['docker-compose', 'run', 'analog']
+commands_xschem_2 = ['xschem', '-n', '.sch_file_path', '-b','-q'] #netlist maken
+commands_xschem_2 = ['xschem', '-f','-n', '.sch_file_path', '-b','-q'] #flatten netlist maken
+commands_xschem_3 = ['cp','/root/.xschem/simulations/spicefile', '/workspace path'] #netlist copieren
+
+commands_align_1 = ['docker-compose', 'up', '-d']
+commands_align_2 = ['docker', 'exec', '-it','align','bash']
+commands_align_3 = ['schematic2layout.py', 'netlist_dir', '-p', 'pdk_dir']
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -42,7 +54,7 @@ def plot_signals(folder_path, file_names, analog_files, output_dir="plots"):
         print(f"Saved plot to {output_file}")
 
 # === Usage ===
-folder = r'C:/Users/Ruben/OneDrive/Bureaublad/Data_1ns'
+folder = r'C:/Users/Ruben/OneDrive/Bureaublad/Data_50ps'
 file_names = [
     "Net1.txt", "Net2.txt", "net3_complete.txt", "Net4_complete.txt",
     "Net5_complete.txt", "Net6_complete.txt", "Net7_complete.txt", "VOUT.txt"

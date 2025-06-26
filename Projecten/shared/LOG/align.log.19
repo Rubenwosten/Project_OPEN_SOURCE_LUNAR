@@ -1,0 +1,23 @@
+2025-06-26 04:27:02 align.main INFO : Reading netlist: /workspace/analog/flatten_netlist/RL.sp subckt=RL, flat=0
+2025-06-26 04:27:02 align.compiler.compiler INFO : Starting topology identification...
+2025-06-26 04:27:02 align.cmdline ERROR : Fatal Error. Cannot proceed
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/align/cmdline.py", line 197, in parse_args
+    return schematic2layout(**vars(arguments))
+  File "/usr/local/lib/python3.10/dist-packages/align/main.py", line 167, in schematic2layout
+    primitive_lib = generate_hierarchy(netlist, subckt, topology_dir, flatten, pdk_dir)
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 27, in generate_hierarchy
+    ckt_data, primitive_library = compiler_input(
+  File "/usr/local/lib/python3.10/dist-packages/align/compiler/compiler.py", line 76, in compiler_input
+    ckt_parser.parse(lines)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 88, in parse
+    self._dispatch(cache)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 106, in _dispatch
+    self._process_instance(token.value.upper(), args, kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/parser.py", line 150, in _process_instance
+    if self.library.find(model):
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/library.py", line 22, in find
+    return next((x for x in self if x.name == name.upper()), None)
+  File "/usr/local/lib/python3.10/dist-packages/align/schema/library.py", line 22, in <genexpr>
+    return next((x for x in self if x.name == name.upper()), None)
+AttributeError: 'int' object has no attribute 'upper'
